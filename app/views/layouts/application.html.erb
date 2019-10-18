@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sample</title>
+  <style type="text/css" href="./style.css"></style>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tag %>
+
+</head>
+<body>
+
+<nav  class="red accent-2">
+  <div class="nav-wrapper">
+    <%= link_to 'Blog', '/miniapp', class: 'brand-logo' %>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if user_signed_in? %>
+        <li><%= current_user.nickname %></li>
+        <li><a href="/users/<%= current_user.id %>">My Page</a></li>     
+        <li><%= link_to 'SignOut', destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to 'Post Blog', '/miniapp/new' %></li> 
+      <% else %>
+        <li><%= link_to 'SignIn', new_user_session_path %></li>
+        <li><%= link_to 'SignUp', new_user_registration_path %></li>
+      <% end %>
+
+    </ul>
+  </div>
+</nav> 
+    
+  <%= yield %>
+
+<script type="text/javascript" src="./app.js"></script>
+</body>
+</html>
